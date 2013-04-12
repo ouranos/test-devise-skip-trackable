@@ -38,3 +38,10 @@ gem 'unicorn'
 
 # To use debugger
 # gem 'debugger'
+
+
+group :test do
+  gem 'minitest'
+  gem 'minitest-reporters'
+  gem 'simple_mock'
+end
