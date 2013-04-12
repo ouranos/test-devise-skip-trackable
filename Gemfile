@@ -44,4 +44,6 @@ group :test do
   gem 'minitest'
   gem 'minitest-reporters'
   gem 'simple_mock'
+
+  gem 'factory_girl_rails'
 end
