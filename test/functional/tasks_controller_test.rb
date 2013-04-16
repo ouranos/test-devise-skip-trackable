@@ -32,18 +32,12 @@ class TasksControllerTest < ActionController::TestCase
   end
 
   test 'get #new should not track user' do
-    time = @current_user.updated_at
-    count = @current_user.sign_in_count
+    assert_no_difference ['@current_user.reload.sign_in_count'], "user shouldn't be tracked" do
+      get :new, format: :json, auth_token: @current_user.authentication_token
+    end
 
-    get :new, format: :json, auth_token: @current_user.authentication_token
     assert_response :success
-
-    @current_user.reload
-
-    assert_equal time, @current_user.updated_at
-    assert_equal count, @current_user.sign_in_count
-
-    #assert_no_difference ['@current_user.reload.updated_at', '@current_user.reload.sign_in_count'], "user shouldn't be tracked" do
-    #end
+    assert_nil @current_user.last_sign_in_at
+    assert_nil @current_user.current_sign_in_at
   end
 end
