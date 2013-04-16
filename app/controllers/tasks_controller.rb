@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
   respond_to :json
 
-  before_filter :authenticate_user!
-
   before_filter :skip_trackable, only: :new
+
+  before_filter :authenticate_user!
 
   def index
     @tasks = Task.all
